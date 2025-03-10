@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class 1 Test Paper</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            background-image: 
+                radial-gradient(circle at 25px 25px, #ffd700 2%, transparent 0%),
+                radial-gradient(circle at 75px 75px, #ff69b4 2%, transparent 0%),
+                radial-gradient(circle at 125px 125px, #98fb98 2%, transparent 0%);
+            background-size: 100px 100px;
+            text-align: center;
+            padding: 20px;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: auto;
+            border: 3px solid #ffd700;
+        }
+        .question {
+            margin-bottom: 15px;
+            font-size: 18px;
+            text-align: left;
+            color: #4a4a4a;
+        }
+        .options button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 2px solid #ffd700;
+            cursor: pointer;
+            border-radius: 5px;
+            background-color: white;
+            transition: all 0.3s ease;
+        }
+        .options button:hover {
+            background-color: #fff8dc;
+            transform: scale(1.02);
+        }
+        .correct { 
+            background-color: #98fb98 !important;
+            border-color: #32cd32 !important;
+        }
+        .wrong { 
+            background-color: #ffb6c1 !important;
+            border-color: #ff69b4 !important;
+        }
+        .fill-blank select {
+            font-size: 16px;
+            padding: 5px;
+            border: 2px solid #ffd700;
+            border-radius: 5px;
+            background-color: white;
+        }
+        .score {
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 20px;
+            color: #4a4a4a;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #4a4a4a;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+        .true-false-container {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border: 2px dashed #ffd700;
+        }
+        .true-false-question {
+            font-size: 16px;
+            margin: 15px 0;
+            text-align: left;
+            color: #4a4a4a;
+        }
+        .true-false-options {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .true-false-btn {
+            flex: 1;
+            padding: 10px;
+            border: 2px solid #ffd700;
+            border-radius: 5px;
+            background-color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 16px;
+        }
+        .true-false-btn:hover {
+            background-color: #fff8dc;
+            transform: scale(1.02);
+        }
+        .true-false-btn.correct {
+            background-color: #98fb98 !important;
+            border-color: #32cd32 !important;
+        }
+        .true-false-btn.wrong {
+            background-color: #ffb6c1 !important;
+            border-color: #ff69b4 !important;
+        }
+        .image-question {
+            margin: 20px 0;
+            text-align: center;
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            border: 2px dashed #ffd700;
+        }
+        .image-container {
+            margin: 15px 0;
+            padding: 10px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+        .question-text {
+            font-size: 16px;
+            margin: 15px 0;
+            color: #4a4a4a;
+        }
+        .answer-boxes {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin: 15px 0;
+        }
+        .answer-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            justify-content: center;
+        }
+        .answer-group label {
+            min-width: 80px;
+            text-align: right;
+            color: #4a4a4a;
+        }
+        .answer-box {
+            width: 200px;
+            height: 40px;
+            text-align: center;
+            font-size: 16px;
+            border: 2px solid #ffd700;
+            border-radius: 5px;
+            padding: 5px;
+        }
+        .answer-box:focus {
+            outline: none;
+            border-color: #32cd32;
+            box-shadow: 0 0 5px rgba(50,205,50,0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Class 1 Test Paper</h2>
+
+        <!-- MCQs -->
+        <div class="question">1. Which of the following is a natural thing?</div>
+        <div class="options">
+            <button onclick="checkAnswer(this, false)">Chair</button>
+            <button onclick="checkAnswer(this, false)">Glass</button>
+            <button onclick="checkAnswer(this, true)">Sand</button>
+        </div>
+        
+        <div class="question">2. Which of these is not a natural thing?</div>
+        <div class="options">
+            <button onclick="checkAnswer(this, false)">Flower</button>
+            <button onclick="checkAnswer(this, true)">Machines</button>
+            <button onclick="checkAnswer(this, false)">Tree</button>
+        </div>
+
+        <!-- Fill in the blanks -->
+        <div class="question">3. Fill in the blanks:</div>
+        <div class="fill-blank">Sun is a <select><option>Choose</option><option>Natural</option><option>Artificial</option></select> thing.</div>
+        <div class="fill-blank">Artificial intelligence is created by <select><option>Choose</option><option>Animals</option><option>Humans</option></select>.</div>
+        <div class="fill-blank">Aibo can <select><option>Choose</option><option>Sing</option><option>Identify</option></select> different people.</div>
+        
+        <!-- True/False -->
+        <div class="question">4. True or False:</div>
+        <div class="true-false-container">
+            <div class="true-false-question">Paint program helps us to make drawings on a paper.</div>
+            <div class="true-false-options">
+                <button class="true-false-btn" onclick="checkTrueFalse(this, false)">True</button>
+                <button class="true-false-btn" onclick="checkTrueFalse(this, true)">False</button>
+            </div>
+            
+            <div class="true-false-question">We use Oval shape to draw a circle.</div>
+            <div class="true-false-options">
+                <button class="true-false-btn" onclick="checkTrueFalse(this, true)">True</button>
+                <button class="true-false-btn" onclick="checkTrueFalse(this, false)">False</button>
+            </div>
+        </div>
+
+        <!-- Image Question -->
+        <div class="question">5. Look at the image and fill in the blanks:</div>
+        <div class="image-question">
+            <div class="image-container">
+                <!-- Image will be added here once provided -->
+            </div>
+            <div class="question-text">Fill in the blanks based on the image:</div>
+            <div class="answer-boxes">
+                <div class="answer-group">
+                    <label>Answer 1:</label>
+                    <input type="text" class="answer-box" placeholder="Type your answer">
+                </div>
+                <div class="answer-group">
+                    <label>Answer 2:</label>
+                    <input type="text" class="answer-box" placeholder="Type your answer">
+                </div>
+                <div class="answer-group">
+                    <label>Answer 3:</label>
+                    <input type="text" class="answer-box" placeholder="Type your answer">
+                </div>
+            </div>
+        </div>
+
+        <!-- Submit Button & Score -->
+        <button onclick="calculateScore()" style="margin-top:20px; padding:10px 20px; font-size:16px;">Submit</button>
+        <div class="score" id="scoreDisplay"></div>
+    </div>
+
+    <script>
+        let score = 0;
+        function checkAnswer(button, isCorrect) {
+            if (isCorrect) {
+                button.classList.add("correct");
+                score++;
+            } else {
+                button.classList.add("wrong");
+            }
+            button.disabled = true;
+        }
+        
+        function calculateScore() {
+            let blanks = document.querySelectorAll(".fill-blank select");
+            if (blanks[0].value === "Natural") score++;
+            if (blanks[1].value === "Humans") score++;
+            if (blanks[2].value === "Identify") score++;
+            
+            // Add image question scoring logic here once you provide the correct answers
+            // const imageAnswers = document.querySelectorAll(".answer-box");
+            // if (imageAnswers[0].value.toLowerCase() === "correct_answer_1") score++;
+            // if (imageAnswers[1].value.toLowerCase() === "correct_answer_2") score++;
+            // if (imageAnswers[2].value.toLowerCase() === "correct_answer_3") score++;
+            
+            document.getElementById("scoreDisplay").innerText = `Your Score: ${score} out of 10`;
+        }
+
+        function checkTrueFalse(button, isCorrect) {
+            const optionsContainer = button.parentElement;
+            const allButtons = optionsContainer.getElementsByClassName('true-false-btn');
+            
+            // Disable all buttons in this question
+            for (let btn of allButtons) {
+                btn.disabled = true;
+            }
+            
+            if (isCorrect) {
+                button.classList.add("correct");
+                score++;
+            } else {
+                button.classList.add("wrong");
+            }
+        }
+    </script>
+</body>
+</html>
