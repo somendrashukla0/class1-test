@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class 1 Test Paper</title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', 'Helvetica', sans-serif;
+            background-color: #f0f8ff;
+            background-image: 
+                radial-gradient(circle at 25px 25px, #ffd700 2%, transparent 0%),
+                radial-gradient(circle at 75px 75px, #ff69b4 2%, transparent 0%),
+                radial-gradient(circle at 125px 125px, #98fb98 2%, transparent 0%);
+            background-size: 100px 100px;
+            text-align: center;
+            padding: 20px;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            margin: auto;
+            border: 5px solid #ffd700;
+        }
+        .test-header {
+            background: linear-gradient(135deg, #FFF4D4, #FFE4E1);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border: 2px dashed #ffd700;
+        }
+        .test-info {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 10px;
+            font-size: 16px;
+            color: #666;
+        }
+        .info-box {
+            background: white;
+            padding: 8px 15px;
+            border-radius: 8px;
+            border: 2px solid #ffd700;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .info-icon {
+            font-size: 20px;
+            color: #ffd700;
+        }
+        h2 {
+            color: #4a4a4a;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 10px;
+            font-size: 28px;
+            background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: bold;
+        }
+        .school-name {
+            color: #4a4a4a;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+            background: linear-gradient(45deg, #ffd700, #ff69b4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            padding: 10px;
+            border-bottom: 2px dashed #ffd700;
+        }
+        .question {
+            margin-bottom: 20px;
+            font-size: 18px;
+            text-align: left;
+            color: #4a4a4a;
+            padding: 10px;
+            border-left: 4px solid #ffd700;
+            background: linear-gradient(to right, #fff4d4 0%, transparent 100%);
+        }
+        .options button {
+            background: linear-gradient(to right, #fff, #f8f9fa);
+            transition: all 0.3s ease;
+        }
+        .options button:hover {
+            transform: scale(1.02);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .correct { 
+            background-color: #98fb98 !important;
+            border-color: #32cd32 !important;
+        }
+        .wrong { 
+            background-color: #ffb6c1 !important;
+            border-color: #ff69b4 !important;
+        }
+        .fill-blank select {
+            font-size: 16px;
+            padding: 5px;
+            border: 2px solid #ffd700;
+            border-radius: 5px;
+            background-color: white;
+        }
+        .score {
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 20px;
+            color: #4a4a4a;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+        .true-false-container {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border: 2px dashed #ffd700;
+        }
+        .true-false-question {
+            font-size: 16px;
+            margin: 15px 0;
+            text-align: left;
+            color: #4a4a4a;
+        }
+        .true-false-options {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .true-false-btn {
+            flex: 1;
+            padding: 10px;
+            border: 2px solid #ffd700;
+            border-radius: 5px;
+            background-color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 16px;
+        }
+        .true-false-btn:hover {
+            background-color: #fff8dc;
+            transform: scale(1.02);
+        }
+        .true-false-btn.correct {
+            background-color: #98fb98 !important;
+            border-color: #32cd32 !important;
+        }
+        .true-false-btn.wrong {
+            background-color: #ffb6c1 !important;
+            border-color: #ff69b4 !important;
+        }
+        .image-question {
+            border: 3px dashed #ffd700;
+            background: linear-gradient(to bottom, #fff, #f8f9fa);
+        }
+        .image-container {
+            margin: 15px 0;
+            padding: 10px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+        .question-text {
+            font-size: 16px;
+            margin: 15px 0;
+            color: #4a4a4a;
+        }
+        .answer-boxes {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin: 15px 0;
+        }
+        .answer-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            justify-content: center;
+        }
+        .answer-group label {
+            min-width: 80px;
+            text-align: right;
+            color: #4a4a4a;
+        }
+        .answer-box {
+            background: linear-gradient(to right, #fff, #f8f9fa);
+            border: 2px solid #ffd700;
+            transition: all 0.3s ease;
+        }
+        .answer-box:focus {
+            transform: scale(1.02);
+        }
+        .answer-box.correct {
+            background-color: #98fb98 !important;
+            border-color: #32cd32 !important;
+        }
+        .answer-box.wrong {
+            background-color: #ffb6c1 !important;
+            border-color: #ff69b4 !important;
+        }
+        .shape-label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            min-width: 100px;
+        }
+        .shape-icon {
+            width: 20px;
+            height: 20px;
+            display: inline-block;
+        }
+        .triangle {
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-bottom: 20px solid #4a4a4a;
+        }
+        .rectangle {
+            width: 20px;
+            height: 15px;
+            background: #4a4a4a;
+        }
+        .circle {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #4a4a4a;
+        }
+        .pattern-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px 0;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .pattern-circle {
+            border-radius: 50%;
+            background: #4a4a4a;
+            display: inline-block;
+        }
+        .pattern-question-mark {
+            font-size: 40px;
+            color: #4a4a4a;
+            font-weight: bold;
+        }
+        .pattern-options {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 20px 0;
+        }
+        .pattern-option {
+            cursor: pointer;
+            padding: 10px;
+            border: 2px solid #ffd700;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            background: white;
+        }
+        .pattern-option:hover {
+            transform: scale(1.05);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .pattern-star {
+            color: #4a4a4a;
+            font-size: 40px;
+        }
+        .parents-section {
+            margin-top: 30px;
+            padding: 20px;
+            background: linear-gradient(135deg, #FFF4D4, #FFE4E1);
+            border-radius: 10px;
+            border: 2px dashed #ffd700;
+        }
+        
+        .parents-section h3 {
+            color: #4a4a4a;
+            font-size: 24px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .parents-section p {
+            color: #666;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .form-container {
+            background: white;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .hints {
+            background: #fff8dc;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border: 2px dashed #ffd700;
+        }
+        .hints p {
+            margin: 0;
+            color: #666;
+            font-size: 16px;
+        }
+        .hints strong {
+            color: #4a4a4a;
+        }
+        .instructions-section {
+            background: linear-gradient(135deg, #fff4d4, #f0f8ff);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 10px;
+            border: 2px dashed #ffd700;
+            text-align: left;
+        }
+        .instructions-section h3 {
+            color: #4a4a4a;
+            font-size: 20px;
+            margin-bottom: 10px;
+            text-align: center;
+            text-decoration: underline;
+        }
+        .instructions-section ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        .instructions-section li {
+            margin: 8px 0;
+            padding-left: 25px;
+            position: relative;
+            color: #4a4a4a;
+            font-size: 16px;
+        }
+        .instructions-section li:before {
+            content: "📌";
+            position: absolute;
+            left: 0;
+        }
+        .color-example {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            vertical-align: middle;
+            margin: 0 5px;
+        }
+        .green-example {
+            background-color: #98fb98;
+            border: 1px solid #32cd32;
+        }
+        .red-example {
+            background-color: #ffb6c1;
+            border: 1px solid #ff69b4;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="school-name">ESDEE INTERNATIONAL SCHOOL, DUNGARPUR</div>
+        <h2>Final Practice Test<br>Class 1 Computer</h2>
+        <div class="test-header">
+            <div class="test-info">
+                <div class="info-box">
+                    <span class="info-icon">⏰</span>
+                    <span>Time: 30 Minutes</span>
+                </div>
+                <div class="info-box">
+                    <span class="info-icon">📝</span>
+                    <span>Maximum Marks: 20</span>
+                </div>
+                <div class="info-box">
+                    <span class="info-icon">📚</span>
+                    <span>Subject: Computer</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Instructions Section -->
+        <div class="instructions-section">
+            <h3>Instructions for Students</h3>
+            <ul>
+                <li>Read each question carefully before answering.</li>
+                <li>For MCQs and True/False questions, click on the correct option.</li>
+                <li>For fill-in-the-blanks, select the correct answer from the dropdown menu.</li>
+                <li>For image questions, type your answers in the boxes provided.</li>
+                <li>Correct answers will be shown in green <span class="color-example green-example"></span></li>
+                <li>Wrong answers will be shown in red <span class="color-example red-example"></span></li>
+                <li>Click the Submit button at the end to see your final score.</li>
+            </ul>
+            <h3>For Parents</h3>
+            <ul>
+                <li>Please supervise your child during the test.</li>
+                <li>After test completion, scroll to the "For Parents" section at the bottom.</li>
+                <li>Fill out the Google Form to submit your child's information and test results.</li>
+                <li>The form helps us track student progress and provide better support.</li>
+            </ul>
+        </div>
+
+        <!-- MCQs -->
+        <div class="question">1. Which of the following is a natural thing?</div>
+        <div class="options">
+            <button onclick="checkAnswer(this, false)">Chair</button>
+            <button onclick="checkAnswer(this, false)">Glass</button>
+            <button onclick="checkAnswer(this, true)">Sand</button>
+        </div>
+        
+        <div class="question">2. Which of these is not a natural thing?</div>
+        <div class="options">
+            <button onclick="checkAnswer(this, false)">Flower</button>
+            <button onclick="checkAnswer(this, true)">Machines</button>
+            <button onclick="checkAnswer(this, false)">Tree</button>
+        </div>
+
+        <!-- Fill in the blanks -->
+        <div class="question">3. Fill in the blanks:</div>
+        <div class="fill-blank select">Sun is a <select><option>Choose</option><option>Natural</option><option>Artificial</option></select> thing.</div>
+        <div class="fill-blank">Artificial intelligence is created by <select><option>Choose</option><option>Animals</option><option>Humans</option></select>.</div>
+        <div class="fill-blank">Aibo can <select><option>Choose</option><option>Sing</option><option>Identify</option></select> different people.</div>
+        
+        <!-- True/False -->
+        <div class="question">4. True or False:</div>
+        <div class="true-false-container">
+            <div class="true-false-question">Paint program helps us to make drawings on a paper.</div>
+            <div class="true-false-options">
+                <button class="true-false-btn" onclick="checkTrueFalse(this, false)">True</button>
+                <button class="true-false-btn" onclick="checkTrueFalse(this, true)">False</button>
+            </div>
+            
+            <div class="true-false-question">We use Oval shape to draw a circle.</div>
+            <div class="true-false-options">
+                <button class="true-false-btn" onclick="checkTrueFalse(this, true)">True</button>
+                <button class="true-false-btn" onclick="checkTrueFalse(this, false)">False</button>
+            </div>
+        </div>
+
+        <!-- Image Questions -->
+        <div class="question">5. Look at the image and fill in the blanks:</div>
+        <div class="image-question">
+            <div class="image-container">
+                <img src="https://github.com/somendrashukla0/class1-test/blob/main/Screenshot%202025-03-10%20233642.png?raw=true" alt="Shapes Question">
+            </div>
+            <div class="question-text">Name the shapes shown in the image:</div>
+            <div class="answer-boxes">
+                <div class="answer-group">
+                    <label>Shape 1:</label>
+                    <input type="text" class="answer-box" placeholder="Type your answer" onchange="checkImageAnswer(this, ['line', 'straight line'])">
+                </div>
+                <div class="answer-group">
+                    <label>Shape 2:</label>
+                    <input type="text" class="answer-box" placeholder="Type your answer" onchange="checkImageAnswer(this, ['circle', 'round'])">
+                </div>
+                <div class="answer-group">
+                    <label>Shape 3:</label>
+                    <input type="text" class="answer-box" placeholder="Type your answer" onchange="checkImageAnswer(this, ['rectangle', 'oval'])">
+                </div>
+            </div>
+        </div>
+
+        <div class="question">6. Look at the image and fill in the blanks:</div>
+        <div class="image-question">
+            <div class="image-container">
+                <img src="https://github.com/somendrashukla0/class1-test/blob/main/Screenshot%202025-03-10%20234918.png?raw=true" alt="Tux Paint Interface">
+            </div>
+            <div class="question-text">Name the parts of Tux Paint interface shown in the image:</div>
+            <div class="hints">
+                <p><strong>Hints:</strong> toolbar, drawing canvas, colour palette, tux, up arrow, help area</p>
+            </div>
+            <div class="answer-boxes">
+                <div class="answer-group">
+                    <label>1:</label>
+                    <input type="text" class="answer-box" placeholder="Type your answer" onchange="checkImageAnswer(this, ['toolbar'])">
+                </div>
+                <div class="answer-group">
+                    <label>2:</label>
+                    <input type="text" class="answer-box" placeholder="Type your answer" onchange="checkImageAnswer(this, ['drawing canvas'])">
+                </div>
+                <div class="answer-group">
+                    <label>3:</label>
+                    <input type="text" class="answer-box" placeholder="Type your answer" onchange="checkImageAnswer(this, ['colour palette', 'color palette'])">
+                </div>
+                <div class="answer-group">
+                    <label>4:</label>
+                    <input type="text" class="answer-box" placeholder="Type your answer" onchange="checkImageAnswer(this, ['tux'])">
+                </div>
+                <div class="answer-group">
+                    <label>5:</label>
+                    <input type="text" class="answer-box" placeholder="Type your answer" onchange="checkImageAnswer(this, ['up arrow'])">
+                </div>
+                <div class="answer-group">
+                    <label>6:</label>
+                    <input type="text" class="answer-box" placeholder="Type your answer" onchange="checkImageAnswer(this, ['help area'])">
+                </div>
+            </div>
+        </div>
+
+        <div class="question">7. Look at the image and write the number of shapes:</div>
+        <div class="image-question">
+            <div class="image-container">
+                <img src="https://github.com/somendrashukla0/class1-test/blob/main/Screenshot%202025-03-11%20072421.png?raw=true" alt="Shape Count Question">
+            </div>
+            <div class="question-text">Count the shapes and write the numbers:</div>
+            <div class="answer-boxes">
+                <div class="answer-group">
+                    <div class="shape-label">
+                        <div class="shape-icon">
+                            <div class="triangle"></div>
+                        </div>
+                        <label>Triangles:</label>
+                    </div>
+                    <input type="text" class="answer-box" placeholder="Count triangles" onchange="checkImageAnswer(this, ['5'])">
+                </div>
+                <div class="answer-group">
+                    <div class="shape-label">
+                        <div class="shape-icon">
+                            <div class="rectangle"></div>
+                        </div>
+                        <label>Rectangles:</label>
+                    </div>
+                    <input type="text" class="answer-box" placeholder="Count rectangles" onchange="checkImageAnswer(this, ['2'])">
+                </div>
+                <div class="answer-group">
+                    <div class="shape-label">
+                        <div class="shape-icon">
+                            <div class="circle"></div>
+                        </div>
+                        <label>Circles:</label>
+                    </div>
+                    <input type="text" class="answer-box" placeholder="Count circles" onchange="checkImageAnswer(this, ['4'])">
+                </div>
+            </div>
+        </div>
+
+        <!-- Pattern Recognition -->
+        <div class="question">8. Look at the pattern and select what comes next:</div>
+        <div class="image-question">
+            <div class="pattern-container">
+                <div class="pattern-circle" style="width: 20px; height: 20px;"></div>
+                <div class="pattern-circle" style="width: 35px; height: 35px;"></div>
+                <div class="pattern-circle" style="width: 50px; height: 50px;"></div>
+                <div class="pattern-circle" style="width: 65px; height: 65px;"></div>
+                <span class="pattern-question-mark">?</span>
+            </div>
+            <div class="question-text">Select the shape that should come next in the pattern:</div>
+            <div class="pattern-options">
+                <div class="pattern-option" onclick="checkPatternAnswer(this, false)">
+                    <div class="pattern-circle" style="width: 15px; height: 15px;"></div>
+                </div>
+                <div class="pattern-option" onclick="checkPatternAnswer(this, true)">
+                    <div class="pattern-circle" style="width: 80px; height: 80px;"></div>
+                </div>
+                <div class="pattern-option" onclick="checkPatternAnswer(this, false)">
+                    <span class="pattern-star">★</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Submit Button & Score -->
+        <button onclick="calculateScore()" style="margin-top:20px; padding:10px 20px; font-size:16px;">Submit</button>
+        <div class="score" id="scoreDisplay"></div>
+
+        <!-- For Parents Section -->
+        <div class="parents-section">
+            <h3>For Parents</h3>
+            <p>Please fill out the form below to submit your child's information and test results:</p>
+            <div class="form-container">
+                <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeBxBLULszZe8J_tok0KPYyLwF1RuV2wDrpkvH_dqjAQ1XhLQ/viewform?embedded=true" 
+                    width="100%" 
+                    height="627" 
+                    frameborder="0" 
+                    marginheight="0" 
+                    marginwidth="0">
+                    Loading…
+                </iframe>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let score = 0;
+        function checkAnswer(button, isCorrect) {
+            if (isCorrect) {
+                button.classList.add("correct");
+                score++;
+            } else {
+                button.classList.add("wrong");
+            }
+            button.disabled = true;
+        }
+        
+        function checkImageAnswer(input, correctAnswers) {
+            const userAnswer = input.value.toLowerCase().trim();
+            if (Array.isArray(correctAnswers)) {
+                // Convert all correct answers to lowercase for comparison
+                const normalizedCorrectAnswers = correctAnswers.map(answer => answer.toLowerCase().trim());
+                // Check if the answer matches any of the correct answers
+                if (normalizedCorrectAnswers.includes(userAnswer)) {
+                    input.classList.add("correct");
+                    input.classList.remove("wrong");
+                    score++;
+                } else {
+                    input.classList.add("wrong");
+                    input.classList.remove("correct");
+                }
+            }
+        }
+        
+        function calculateScore() {
+            // Reset score before calculating
+            score = 0;
+            
+            // Check MCQ answers (questions 1-2)
+            const correctMCQs = document.querySelectorAll('.options button.correct').length;
+            score += correctMCQs;
+            
+            // Check fill in the blanks (question 3)
+            let blanks = document.querySelectorAll(".fill-blank select");
+            if (blanks[0].value === "Natural") score++;
+            if (blanks[1].value === "Humans") score++;
+            if (blanks[2].value === "Identify") score++;
+            
+            // Check true/false (question 4)
+            const correctTrueFalse = document.querySelectorAll('.true-false-btn.correct').length;
+            score += correctTrueFalse;
+            
+            // Count correct image answers (questions 5-7)
+            const imageAnswers = document.querySelectorAll(".answer-box.correct").length;
+            score += imageAnswers;
+            
+            // Check pattern answer (question 8)
+            const correctPattern = document.querySelectorAll('.pattern-option.correct').length;
+            score += correctPattern;
+            
+            document.getElementById("scoreDisplay").innerText = `Your Score: ${score} out of 20`;
+        }
+
+        function checkTrueFalse(button, isCorrect) {
+            const optionsContainer = button.parentElement;
+            const allButtons = optionsContainer.getElementsByClassName('true-false-btn');
+            
+            // Disable all buttons in this question
+            for (let btn of allButtons) {
+                btn.disabled = true;
+            }
+            
+            if (isCorrect) {
+                button.classList.add("correct");
+                score++;
+            } else {
+                button.classList.add("wrong");
+            }
+        }
+
+        function checkPatternAnswer(button, isCorrect) {
+            const allOptions = document.querySelectorAll('.pattern-option');
+            allOptions.forEach(opt => opt.style.pointerEvents = 'none');
+            
+            if (isCorrect) {
+                button.classList.add("correct");
+                score++;
+            } else {
+                button.classList.add("wrong");
+            }
+        }
+    </script>
+</body>
+</html>
